@@ -1,1 +1,194 @@
-<h1>Index.ejs Dashboard</h1>
+<div id="main">
+  <!--Page Hearder and Bread Crumb-->
+  <div class="page-heading">
+    <div class="page-title">
+      <div class="row">
+        <div class="col-12 col-md-6 order-md-1 order-last">
+          <h3>User Settings</h3>
+        </div>
+
+        <div class="col-12 col-md-6 order-md-2 order-first">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Page Hearder and Bread Crumb-->
+
+  <!--General Message Section-->
+  <div class="card-header text-center">
+    <div class="alert alert-<%= genMsg.MsgStyle %>">
+      <%= genMsg.dispMsg %>
+    </div>
+  </div>
+  <!--General Message Section-->
+
+
+  <!--Page Content-->
+  <div class="page-content">
+    <section class="row">
+      <div class="col-12 col-lg-9">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h4>Manage Users</h4>
+              </div>
+              <div class="card-body">
+                <!--Add New Details-->
+                <div class="page-heading">
+                  <div class="page-title">
+                    <div class="row">
+                      <div class="col-12 col-md-6 order-md-1 order-first">
+                      </div>
+
+                      <div class="col-12 col-md-6 order-md-2 order-last">
+                        <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                          <ol class="breadcrumb">
+                            <li class="breadcrumb-item active" aria-current="page">
+                              <a class="link-body-emphasis fw-semibold text-decoration-none" href="/addUser">
+                                + Add New User
+                              </a>
+                            </li>
+                          </ol>
+                        </nav>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--Add New Details-->
+                <!-- table responsive -->
+                <section class="section">
+                  <div class="row" id="table-responsive">
+                    <div class="col-12">
+                      <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                          <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">First Name</th>
+                              <th scope="col">Last Name</th>
+                              <th scope="col">Phone Number</th>
+                              <th scope="col">Email</th>
+                              <th scope="col">Details</th>
+                              <th scope="col" colspan="3">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <% objUsers.forEach(element=> { %>
+                              <tr class="align-middle">
+                                <td>
+                                  <%= element._id %>
+                                </td>
+                                <td>
+                                  <%= element.firstName %>
+                                </td>
+                                <td>
+                                  <%= element.lastName %>
+                                </td>
+                                <td>
+                                  <%= element.phoneNumber %>
+                                </td>
+                                <td>
+                                  <%= element.eMailId %>
+                                </td>
+                                <td>
+                                  <%= element.userDetails %>
+                                </td>
+                                <td>
+                                  <a href="/viewUsers/<%= element._id %>"><i class="fa fa-info-circle"
+                                      style="font-size:17px;color:green;" aria-hidden="true"></i></a>
+                                </td>
+                                <td>
+                                  <a href="/editUser/<%= element._id %>"><i class="fa fa-pencil-square-o"
+                                      style="font-size:15px;color:blue;" aria-hidden="true"></i></a>
+                                </td>
+                                <td>
+                                  <form action="/deleteUser/<%= element._id %>?_method=DELETE" method="POST" class="position-relative" id="frmDelUser">
+                                    <i class="fa fa-trash-o" style="font-size:17px;color:red;cursor: pointer;"
+                                        aria-hidden="true" onclick="fnDeleteUserDetails();"></i>
+                                  </form>
+                                </td>
+                              </tr>
+                              <% }); %>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <% if (objUsers.length> 0) { %>
+                    <nav aria-label="page navigation example">
+                      <ul class="pagination pagination-success justify-content-end">
+                        <% if (current==1) { %>
+                          <li class="page-item disabled"><a href="javascript:void(null);" class="page-link">&lt;</a>
+                          </li>
+                          <% } else { %>
+                            <li class="page-item"><a href="/?page=1" class="page-link">&lt;</a></li>
+                            <% } %>
+
+                              <% let i=(Number(current)> 5 ? Number(current) - 4 : 1) %>
+                                <% if (i !==1) { %>
+                                  <li class="page-item disabled"><a href="javascript:void(null);"
+                                      class="page-link">...</a></li>
+                                  <% } %>
+
+                                    <% for(; i <=(Number(current) + 4) && i <=pages; i++) { %>
+                                      <% if (i==current) { %>
+                                        <li class="page-item active"><a href="javascript:void(null);" class="page-link">
+                                            <%= i %>
+                                          </a></li>
+                                        <% } else { %>
+                                          <li class="page-item"><a href="/?page=<%= i %>" class="page-link">
+                                              <%= i %>
+                                            </a></li>
+                                          <% } %>
+
+                                            <% if (i==Number(current) + 4 && i < pages) { %>
+                                              <li class="page-item disabled"><a href="javascript:void(null);"
+                                                  class="page-link">...</a>
+                                              </li>
+                                              <% } %>
+                                                <% } %>
+
+                                                  <% if (current==pages) { %>
+                                                    <li class="page-item disabled"><a href="javascript:void(null);"
+                                                        class="page-link">&gt;</a></li>
+                                                    <% } else { %>
+                                                      <li class="page-item"><a href="/?page=<%= pages %>"
+                                                          class="page-link">&gt;</a>
+                                                      </li>
+                                                      <% } %>
+
+                      </ul>
+                    </nav>
+                    <% } %>
+                </section>
+                <!-- table responsive -->
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-xl-4">
+          </div>
+          <div class="col-12 col-xl-8">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 col-lg-3 col-md-6">
+          </div>
+          <div class="col-6 col-lg-3 col-md-6">
+          </div>
+          <div class="col-6 col-lg-3 col-md-6">
+          </div>
+          <div class="col-6 col-lg-3 col-md-6">
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-3">
+
+      </div>
+    </section>
+  </div>
+  <!--Page Content-->
+</div>

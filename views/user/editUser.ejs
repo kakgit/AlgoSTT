@@ -1,0 +1,91 @@
+<div id="main">
+    <div class="page-heading">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-12 col-md-6 order-md-1 order-last">
+                    <h3>Edit <%= objUsers.firstName %> <%= objUsers.lastName %> Details</h3>
+                </div>
+                <div class="col-12 col-md-6 order-md-2 order-first">
+                    <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/">Manage Users</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Edit User Details</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- // Basic multiple Column Form section start -->
+    <section id="multiple-column-form">
+        <div class="row match-height">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <div class="alert alert-<%= genMsg.MsgStyle %>">
+                            <%= genMsg.dispMsg %>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <form class="form" action="/updateUser/<%= objUsers._id %>?_method=PUT" method="POST">
+                                <div class="row">
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="txtFirstName">First Name</label>
+                                            <input type="text" id="txtFirstName" class="form-control"
+                                                placeholder="First Name" name="firstName" value="<%= objUsers.firstName %>" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="txtLastName">Last Name</label>
+                                            <input type="text" id="txtLastName" class="form-control"
+                                                placeholder="Last Name" name="lastName" value="<%= objUsers.lastName %>" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="txtPhoneNumber">Phone Number</label>
+                                            <input type="text" id="txtPhoneNumber" class="form-control"
+                                                name="phoneNumber" placeholder="Contact Number" value="<%= objUsers.phoneNumber %>" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="txtEmailId">Email</label>
+                                            <input type="email" id="txtEmailId" class="form-control" name="eMailId"
+                                                placeholder="Email Id" value="<%= objUsers.eMailId %>" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="txtDetails">User Details</label>
+                                            <input type="text" id="txtDetails" class="form-control"
+                                                placeholder="User Details" name="userDetails"  value="<%= objUsers.userDetails %>" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-12">
+                                        <div class='form-check'>
+                                            <div class="checkbox">
+                                                <input type="checkbox" id="cbRememberMe" class='form-check-input'
+                                                    checked>
+                                                <label for="cbRememberMe">Remember Me</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 d-flex justify-content-end">
+                                        <button type="submit" class="btn btn-primary me-1 mb-1">UPDATE</button>
+                                        <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- // Basic multiple Column Form section end -->
+</div>
